@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เซียมซี Townhall</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #ff9966, #ff5e62);
+    color: white;
+    padding-top: 80px;
+}
+.box {
+    background: rgba(255,255,255,0.15);
+    padding: 40px;
+    border-radius: 20px;
+    display: inline-block;
+    width: 320px;
+}
+.stick {
+    font-size: 60px;
+    margin: 20px 0;
+    display: inline-block;
+}
+.shake {
+    animation: shake 0.4s infinite;
+}
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    50% { transform: rotate(-10deg); }
+    75% { transform: rotate(6deg); }
+    100% { transform: rotate(0deg); }
+}
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: white;
+    color: #ff5e62;
+    font-weight: bold;
+}
+button:disabled {
+    opacity: 0.6;
+}
+#result {
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    min-height: 40px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h1>🎋 เซียมซี Townhall 🎋</h1>
+    <p>กดปุ่มเพื่อเขย่า</p>
+    <div id="stick" class="stick">🎍</div>
+    <br>
+    <button id="drawBtn" onclick="draw()">เขย่าเซียมซี</button>
+    <div id="result"></div>
+</div>
+
+<script>
+function draw() {
+    const button = document.getElementById("drawBtn");
+    const stick = document.getElementById("stick");
+    const resultDiv = document.getElementById("result");
+
+    const consolation = [
+        "โชคดีเล็กน้อย",
+        "พยายามอีกครั้ง",
+        "เกือบแล้ว!",
+        "วันนี้ยังไม่ใช่",
+        "มีลุ้น!"
+    ];
+
+    button.disabled = true;
+    resultDiv.innerHTML = "กำลังเขย่า...";
+    stick.classList.add("shake");
+
+    setTimeout(() => {
+        stick.classList.remove("shake");
+
+        if (Math.random() < 0.4) {
+            resultDiv.innerHTML = "🎉 ยินดีด้วย! คุณได้รางวัลจาก ttb Spark 🎉";
+        } else {
+            const randomText = consolation[Math.floor(Math.random() * consolation.length)];
+            resultDiv.innerHTML = "ผลที่ได้: " + randomText;
+        }
+
+        button.disabled = false;
+    }, 3000);
+}
+</script>
+
+</body>
+</html>
