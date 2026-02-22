@@ -3,69 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ttb Spark Lucky Draw</title>
+<title>ttb Spark</title>
 
 <style>
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #003DA5, #FF6A13);
-    color: white;
-    padding-top: 60px;
+  margin: 0;
+  font-family: sans-serif;
+  background: linear-gradient(135deg,#3a4fd9,#ff7a18);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .box {
-    background: rgba(255,255,255,0.1);
-    padding: 40px;
-    border-radius: 20px;
-    display: inline-block;
-    width: 340px;
+  background: rgba(255,255,255,0.1);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  color: white;
+  width: 90%;
+  max-width: 400px;
 }
 
 .logo {
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.shake-img {
-    width: 180px;
-    margin: 20px 0;
-    transition: transform 0.2s;
+.image-box {
+  width: 300px;
+  height: 300px;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.4);
 }
 
-.shake {
-    animation: shake 0.4s infinite;
-}
-
-@keyframes shake {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(10deg); }
-    50% { transform: rotate(-10deg); }
-    75% { transform: rotate(6deg); }
-    100% { transform: rotate(0deg); }
+.image-box img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 button {
-    padding: 14px 28px;
-    font-size: 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: white;
-    color: #003DA5;
-    font-weight: bold;
-}
-
-button:disabled {
-    opacity: 0.6;
-}
-
-#result {
-    margin-top: 25px;
-    font-size: 22px;
-    font-weight: bold;
-    min-height: 40px;
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
 }
 </style>
 </head>
@@ -73,49 +61,27 @@ button:disabled {
 <body>
 
 <div class="box">
-    <div class="logo">✨ ttb Spark Townhall ✨</div>
-    <p>เขย่าเพื่อลุ้นรางวัล</p>
+  <div class="logo">✨ ttb Spark Townhall ✨</div>
+  <p>เขย่าเพื่อลุ้นรางวัล</p>
 
-    <img src="shake.png" id="shakeImg" class="shake-img">
+  <div class="image-box">
+    <img src="IMG_3148.jpeg" alt="รางวัล">
+  </div>
 
-    <br>
-    <button id="drawBtn" onclick="draw()">เขย่าเลย!</button>
+  <button onclick="draw()">เขย่าเลย!</button>
 
-    <div id="result"></div>
+  <div id="result" style="margin-top:20px;font-size:18px;"></div>
 </div>
 
 <script>
 function draw() {
+  const prizes = [
+    "🎉 ได้รับของที่ระลึก 😍",
+    "😭 ลองใหม่อีกครั้ง!"
+  ];
 
-    const button = document.getElementById("drawBtn");
-    const img = document.getElementById("shakeImg");
-    const resultDiv = document.getElementById("result");
-
-    const consolation = [
-        "ยังไม่ใช่รอบนี้",
-        "ใกล้แล้ว!..",
-        "อาจจะยังน้าาา",
-        "ครั้งหน้าต้องได้!"
-    ];
-
-    button.disabled = true;
-    resultDiv.innerHTML = "กำลังเขย่า...";
-    img.classList.add("shake");
-
-    setTimeout(() => {
-
-        img.classList.remove("shake");
-
-        if (Math.random() < 0.4) {
-            resultDiv.innerHTML = "🎉 ยินดีด้วย! คุณได้รางวัล ttb Spark 🎉";
-        } else {
-            const randomText = consolation[Math.floor(Math.random() * consolation.length)];
-            resultDiv.innerHTML = randomText;
-        }
-
-        button.disabled = false;
-
-    }, 3000);
+  const random = prizes[Math.floor(Math.random() * prizes.length)];
+  document.getElementById("result").innerText = random;
 }
 </script>
 
