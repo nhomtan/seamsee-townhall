@@ -9,7 +9,8 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #003DA5 60%, #FF6A13 100%);
+  /* เพิ่มส้มให้เด่นขึ้น */
+  background: linear-gradient(135deg, #003DA5 40%, #FF6A13 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,18 +31,20 @@ body {
 .logo {
   font-size: 28px;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-.subtitle {
-  font-size: 15px;
-  opacity: 0.9;
+#result {
+  font-size: 20px;
+  font-weight: bold;
+  min-height: 30px;
+  margin-bottom: 20px; /* อยู่เหนือรูป */
 }
 
 .image-box {
   width: 280px;
   height: 280px;
-  margin: 25px auto;
+  margin: 15px auto 25px auto;
 }
 
 .image-box img {
@@ -53,7 +56,7 @@ body {
 
 /* เขย่า */
 .shake {
-  animation: shake 0.35s infinite;
+  animation: shake 0.5s infinite;
 }
 
 @keyframes shake {
@@ -79,13 +82,6 @@ button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
-
-#result {
-  margin-top: 25px;
-  font-size: 20px;
-  font-weight: bold;
-  min-height: 30px;
-}
 </style>
 </head>
 
@@ -93,15 +89,15 @@ button:disabled {
 
 <div class="box">
   <div class="logo">ttb Spark Townhall</div>
-  <div class="subtitle">เขย่าเพื่อลุ้นรางวัล</div>
+
+  <!-- ผลรางวัลย้ายมาไว้บนรูป -->
+  <div id="result"></div>
 
   <div class="image-box">
     <img id="prizeImg" src="IMG_3148.jpeg" alt="รางวัล">
   </div>
 
   <button id="drawBtn" onclick="draw()">เขย่าเลย</button>
-
-  <div id="result"></div>
 </div>
 
 <script>
@@ -112,10 +108,9 @@ function draw() {
   const btn = document.getElementById("drawBtn");
 
   const consolation = [
-    "ใกล้แล้ว!",
-    "ลองใหม่อีกครั้ง",
-    "มีลุ้นนะ!",
-    "ครั้งหน้าต้องได้!"
+    "อาจจะยังน้าาา 🥹",
+    "ลองใหม่อีกครั้ง 🤦🏻‍♀️",
+    "ขอโทษคร้าบ วันนี้อด 😭"
   ];
 
   result.innerText = "";
@@ -128,7 +123,7 @@ function draw() {
     img.classList.remove("shake");
 
     if (Math.random() < 0.4) {
-      result.innerText = "🎉 ยินดีด้วย! คุณได้รางวัล ttb Spark 🎉";
+      result.innerText = "ยินดีด้วย! คุณได้รางวัล ttb Spark 🎉";
     } else {
       const randomText = consolation[Math.floor(Math.random() * consolation.length)];
       result.innerText = randomText;
