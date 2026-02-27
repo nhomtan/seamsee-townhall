@@ -6,9 +6,24 @@
 <title>✨ เซียมซี ttb Spark ✨</title>
 
 <style>
+  /* ประกาศใช้งานฟอนต์ Ekkachon (ถ้าคุณมีไฟล์ฟอนต์ในเครื่อง ให้เปลี่ยน URL) */
+  @font-face {
+    font-family: 'ttb-ekkachon';
+    src: url('https://www.ttbbank.com/static/fonts/ttb-ekkachon-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'ttb-ekkachon';
+    src: url('https://www.ttbbank.com/static/fonts/ttb-ekkachon-bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+  }
+
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    /* เปลี่ยนมาใช้ฟอนต์ Ekkachon */
+    font-family: 'ttb-ekkachon', Arial, sans-serif;
     background: linear-gradient(135deg, #003DA5 40%, #FF6A13 100%);
     display: flex;
     justify-content: center;
@@ -17,29 +32,28 @@
     overflow: hidden;
   }
 
-  /* ปรับขนาดกรอบให้ใหญ่ขึ้น 50% */
   .box {
     background: rgba(255, 255, 255, 0.1);
-    padding: 45px; /* เพิ่ม Padding */
-    border-radius: 36px; /* เพิ่มความโค้งมนให้รับกับขนาดที่ใหญ่ขึ้น */
+    padding: 45px;
+    border-radius: 36px;
     text-align: center;
     color: white;
     width: 90%;
-    max-width: 600px; /* ขยายจาก 400px เป็น 600px (ใหญ่ขึ้น 50%) */
+    max-width: 600px;
     backdrop-filter: blur(15px);
     box-shadow: 0 12px 48px rgba(0,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.1);
   }
 
   .logo {
-    font-size: 39px; /* ขยายขนาดฟอนต์หัวข้อ 50% */
+    font-size: 42px; /* ปรับขนาดให้เข้ากับฟอนต์ใหม่ */
     font-weight: bold;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   }
 
   #result {
-    font-size: 33px; /* ขยายขนาดฟอนต์ผลลัพธ์ 50% */
+    font-size: 33px;
     font-weight: bold;
     min-height: 60px;
     margin: 15px 0;
@@ -50,10 +64,11 @@
     align-items: center;
     justify-content: center;
     padding: 15px;
+    line-height: 1.2;
   }
 
   .image-box {
-    width: 375px; /* ขยายขนาดรูปจาก 250px เป็น 375px (ใหญ่ขึ้น 50%) */
+    width: 375px;
     height: 375px;
     margin: 30px auto;
     display: flex;
@@ -87,8 +102,9 @@
   }
 
   button {
-    padding: 24px 48px; /* ขยายปุ่มให้ใหญ่ขึ้น */
-    font-size: 30px; /* ขยายฟอนต์ปุ่ม */
+    font-family: 'ttb-ekkachon', Arial, sans-serif;
+    padding: 24px 48px;
+    font-size: 32px;
     border-radius: 75px;
     border: none;
     cursor: pointer;
@@ -133,7 +149,7 @@ function draw() {
   const btn = document.getElementById("drawBtn");
 
   const consolation = [
-    "เกือบแล้ว! ลองใหม่อีกครั้ง 🤦🏻‍♀️",
+    "เกือบแล้ว! ลองอีกครั้ง 🤦🏻‍♀️",
     "วันนี้พักก่อน พรุ่งนี้เอาใหม่ 😭",
     "ฮึบไว้! ครั้งหน้าโดนแน่ ✌️"
   ];
