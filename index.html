@@ -17,44 +17,45 @@
     overflow: hidden;
   }
 
+  /* ปรับขนาดกรอบให้ใหญ่ขึ้น 50% */
   .box {
     background: rgba(255, 255, 255, 0.1);
-    padding: 30px;
-    border-radius: 24px;
+    padding: 45px; /* เพิ่ม Padding */
+    border-radius: 36px; /* เพิ่มความโค้งมนให้รับกับขนาดที่ใหญ่ขึ้น */
     text-align: center;
     color: white;
-    width: 85%;
-    max-width: 400px;
+    width: 90%;
+    max-width: 600px; /* ขยายจาก 400px เป็น 600px (ใหญ่ขึ้น 50%) */
     backdrop-filter: blur(15px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.1);
   }
 
   .logo {
-    font-size: 26px;
+    font-size: 39px; /* ขยายขนาดฟอนต์หัวข้อ 50% */
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   }
 
   #result {
-    font-size: 22px;
+    font-size: 33px; /* ขยายขนาดฟอนต์ผลลัพธ์ 50% */
     font-weight: bold;
-    min-height: 40px;
-    margin: 10px 0;
+    min-height: 60px;
+    margin: 15px 0;
     color: #FF6A13;
     background: white;
-    border-radius: 12px;
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 15px;
   }
 
   .image-box {
-    width: 250px;
-    height: 250px;
-    margin: 20px auto;
+    width: 375px; /* ขยายขนาดรูปจาก 250px เป็น 375px (ใหญ่ขึ้น 50%) */
+    height: 375px;
+    margin: 30px auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,7 +65,7 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 20px;
+    border-radius: 30px;
   }
 
   .shake {
@@ -86,16 +87,16 @@
   }
 
   button {
-    padding: 16px 32px;
-    font-size: 20px;
-    border-radius: 50px;
+    padding: 24px 48px; /* ขยายปุ่มให้ใหญ่ขึ้น */
+    font-size: 30px; /* ขยายฟอนต์ปุ่ม */
+    border-radius: 75px;
     border: none;
     cursor: pointer;
     background: #FF6A13;
     color: white;
     font-weight: bold;
     transition: 0.3s;
-    box-shadow: 0 4px 15px rgba(255, 106, 19, 0.4);
+    box-shadow: 0 6px 20px rgba(255, 106, 19, 0.4);
     width: 100%;
   }
 
@@ -114,7 +115,7 @@
 <body>
 
 <div class="box">
-  <div class="logo">เซียมซี ttb Spark ✨</div>
+  <div class="logo">✨ เซียมซี ttb Spark ✨</div>
   
   <div id="result">พร้อมแล้วกดเขย่าเลย!</div>
 
@@ -146,11 +147,9 @@ function draw() {
 
     if (Math.random() < 0.4) {
       result.innerText = "ยินดีด้วย! คุณได้รางวัล ttb Spark 🎉";
-      result.style.color = "#FF6A13";
     } else {
       const randomText = consolation[Math.floor(Math.random() * consolation.length)];
       result.innerText = randomText;
-      result.style.color = "#FF6A13";
     }
 
     btn.disabled = false;
