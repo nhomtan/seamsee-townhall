@@ -4,97 +4,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>✨ เซียมซี ttb Spark ✨</title>
- 
+
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  /* เพิ่มส้มให้เด่นขึ้น */
-  background: linear-gradient(135deg, #003DA5 40%, #FF6A13 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #003DA5 40%, #FF6A13 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-.box {
-  background: rgba(255,255,255,0.08);
-  padding: 40px;
-  border-radius: 24px;
-  text-align: center;
-  color: white;
-  width: 90%;
-  max-width: 420px;
-  backdrop-filter: blur(12px);
-}
+  .box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 24px;
+    text-align: center;
+    color: white;
+    width: 85%;
+    max-width: 400px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
 
-.logo {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
+  .logo {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
 
-#result {
-  font-size: 20px;
-  font-weight: bold;
-  min-height: 30px;
-  margin-bottom: 20px; /* อยู่เหนือรูป */
-}
+  #result {
+    font-size: 22px;
+    font-weight: bold;
+    min-height: 40px;
+    margin: 10px 0;
+    color: #FF6A13;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
 
-.image-box {
-  width: 280px;
-  height: 280px;
-  margin: 15px auto 25px auto;
-}
+  .image-box {
+    width: 250px;
+    height: 250px;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.image-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 20px;
-}
+  .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 20px;
+  }
 
-/* เขย่า */
-.shake {
-  animation: shake 0.5s infinite;
-}
+  .shake {
+    animation: shake 0.5s infinite;
+  }
 
-@keyframes shake {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(6deg); }
-  50% { transform: rotate(-6deg); }
-  75% { transform: rotate(4deg); }
-  100% { transform: rotate(0deg); }
-}
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
 
-button {
-  padding: 14px 28px;
-  font-size: 18px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  background: #FF6A13;
-  color: white;
-  font-weight: bold;
-}
+  button {
+    padding: 16px 32px;
+    font-size: 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    background: #FF6A13;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 106, 19, 0.4);
+    width: 100%;
+  }
 
-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
+  button:active {
+    transform: scale(0.95);
+  }
+
+  button:disabled {
+    background: #cccccc;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
 </style>
 </head>
 
 <body>
 
 <div class="box">
-  <div class="logo">ttb Spark Townhall</div>
-
-  <!-- ผลรางวัลย้ายมาไว้บนรูป -->
-  <div id="result"></div>
+  <div class="logo">เซียมซี ttb Spark ✨</div>
+  
+  <div id="result">พร้อมแล้วกดเขย่าเลย!</div>
 
   <div class="image-box">
-    <img id="prizeImg" src="IMG_3148.jpeg" alt="รางวัล">
+    <img id="prizeImg" src="fortune.png" alt="เซียมซี">
   </div>
 
   <button id="drawBtn" onclick="draw()">เขย่าเลย</button>
@@ -102,36 +127,34 @@ button:disabled {
 
 <script>
 function draw() {
-
   const img = document.getElementById("prizeImg");
   const result = document.getElementById("result");
   const btn = document.getElementById("drawBtn");
 
   const consolation = [
-    "อาจจะยังน้าาา 🥹",
-    "ลองใหม่อีกครั้ง 🤦🏻‍♀️",
-    "ขอโทษคร้าบ วันนี้อด 😭"
+    "เกือบแล้ว! ลองใหม่อีกครั้ง 🤦🏻‍♀️",
+    "วันนี้พักก่อน พรุ่งนี้เอาใหม่ 😭",
+    "ฮึบไว้! ครั้งหน้าโดนแน่ ✌️"
   ];
 
-  result.innerText = "";
+  result.innerText = "กำลังเขย่า...";
   btn.disabled = true;
-
   img.classList.add("shake");
 
   setTimeout(() => {
-
     img.classList.remove("shake");
 
     if (Math.random() < 0.4) {
       result.innerText = "ยินดีด้วย! คุณได้รางวัล ttb Spark 🎉";
+      result.style.color = "#FF6A13";
     } else {
       const randomText = consolation[Math.floor(Math.random() * consolation.length)];
       result.innerText = randomText;
+      result.style.color = "#FF6A13";
     }
 
     btn.disabled = false;
-
-  }, 3000);
+  }, 2500);
 }
 </script>
 
