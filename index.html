@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>✨ เซียมซี ttb Spark ✨</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,80 +10,95 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
     margin: 0;
+    padding: 0;
     font-family: 'IBM Plex Sans Thai', sans-serif;
     background: linear-gradient(135deg, #003DA5 40%, #FF6A13 100%);
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 
+  /* คอนเทนเนอร์หลักแบบ Responsive */
   .box {
     background: rgba(255, 255, 255, 0.1);
-    padding: 45px;
-    border-radius: 36px;
+    padding: 2rem;
+    border-radius: 2rem;
     text-align: center;
     color: white;
     width: 90%;
-    max-width: 600px;
+    max-width: 550px; /* ขนาดกำลังดีสำหรับ Tablet */
     backdrop-filter: blur(15px);
-    box-shadow: 0 12px 48px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.15);
+    margin: 20px;
+    transition: all 0.3s ease;
   }
 
   .logo {
-    font-size: 42px;
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* ปรับขนาดตามหน้าจออัตโนมัติ */
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   }
 
   #result {
-    font-size: 33px;
+    font-size: clamp(1.2rem, 4vw, 2rem);
     font-weight: 700;
-    min-height: 80px;
-    margin: 15px 0;
+    min-height: 4.5rem;
+    margin: 1rem 0;
     background-color: white !important;
-    border-radius: 18px;
+    border-radius: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px;
+    padding: 1rem;
     line-height: 1.3;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     color: #333;
   }
 
+  /* 🏆 รางวัล: น้ำเงิน ttb + Glow ส้ม */
   .winner-active {
     color: #003DA5 !important;
     box-shadow: 0 0 30px rgba(255, 106, 19, 0.9) !important;
-    transform: scale(1.08);
+    transform: scale(1.05);
     border: 3px solid #003DA5;
   }
 
   .lose-active {
     color: #FF6A13 !important;
-    box-shadow: none !important;
-    transform: scale(1);
     border: none;
   }
 
   .image-box {
-    width: 375px;
-    height: 375px;
-    margin: 30px auto;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 1/1; /* บังคับรูปทรงจตุรัส */
+    margin: 1.5rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .image-box img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 30px;
+    border-radius: 1.5rem;
   }
 
+  /* แอนิเมชันเขย่า */
   .shake { animation: shake 0.5s infinite; }
   @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
@@ -94,25 +109,38 @@
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   }
 
-  /* ปุ่มลดขนาดลง 10% จากเดิม */
   button {
     font-family: 'IBM Plex Sans Thai', sans-serif;
-    padding: 11px 26px !important; /* ลดลงจาก 12/30 */
-    font-size: 19px !important;    /* ลดลงจาก 21px */
-    border-radius: 40px;
+    padding: 0.8rem 1.8rem;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    border-radius: 3rem;
     border: none;
     cursor: pointer;
     background: #FF6A13;
     color: white;
     font-weight: 700;
-    width: auto !important;
-    min-width: 155px; /* ลดลงตามสัดส่วน */
+    width: auto;
+    min-width: 150px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     transition: 0.3s;
+    margin-top: 0.5rem;
   }
 
   button:active { transform: scale(0.95); }
   button:disabled { background: #cccccc; cursor: not-allowed; }
+
+  /* 📱 ปรับแต่งพิเศษสำหรับหน้าจอมือถือขนาดเล็ก */
+  @media (max-width: 380px) {
+    .box { padding: 1.5rem; }
+    .image-box { max-width: 240px; }
+    #result { font-size: 1.1rem; min-height: 4rem; }
+  }
+
+  /* 💻 ปรับแต่งสำหรับ Tablet/Desktop */
+  @media (min-width: 768px) {
+    .box { padding: 3rem; max-width: 600px; }
+    .image-box { max-width: 380px; }
+  }
 </style>
 </head>
 <body>
