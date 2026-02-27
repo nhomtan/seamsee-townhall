@@ -25,50 +25,69 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
-  /* คอนเทนเนอร์หลักแบบ Responsive */
+  /* ปุ่มดูประวัติมุมขวาบน */
+  .history-trigger {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+  }
+
+  .history-trigger:active { transform: scale(0.9); }
+
   .box {
     background: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 2rem;
+    padding: 2.5rem 2rem;
+    border-radius: 2.5rem;
     text-align: center;
     color: white;
     width: 90%;
-    max-width: 550px; /* ขนาดกำลังดีสำหรับ Tablet */
+    max-width: 480px;
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     box-shadow: 0 12px 40px rgba(0,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.15);
-    margin: 20px;
-    transition: all 0.3s ease;
   }
 
   .logo {
-    font-size: clamp(1.5rem, 5vw, 2.5rem); /* ปรับขนาดตามหน้าจออัตโนมัติ */
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
     font-weight: 700;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   }
 
   #result {
-    font-size: clamp(1.2rem, 4vw, 2rem);
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
     font-weight: 700;
-    min-height: 4.5rem;
-    margin: 1rem 0;
+    min-height: 6.5rem;
+    margin: 1.2rem 0;
     background-color: white !important;
     border-radius: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    line-height: 1.3;
+    line-height: 1.4;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     color: #333;
   }
 
-  /* 🏆 รางวัล: น้ำเงิน ttb + Glow ส้ม */
   .winner-active {
     color: #003DA5 !important;
     box-shadow: 0 0 30px rgba(255, 106, 19, 0.9) !important;
@@ -78,27 +97,21 @@
 
   .lose-active {
     color: #FF6A13 !important;
-    border: none;
   }
 
   .image-box {
     width: 100%;
-    max-width: 320px;
-    aspect-ratio: 1/1; /* บังคับรูปทรงจตุรัส */
-    margin: 1.5rem auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    max-width: 260px;
+    aspect-ratio: 1/1;
+    margin: 1rem auto 1.5rem;
   }
 
   .image-box img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 1.5rem;
   }
 
-  /* แอนิเมชันเขย่า */
   .shake { animation: shake 0.5s infinite; }
   @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
@@ -109,41 +122,91 @@
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   }
 
-  button {
+  button#drawBtn {
     font-family: 'IBM Plex Sans Thai', sans-serif;
-    padding: 0.8rem 1.8rem;
-    font-size: clamp(1rem, 3vw, 1.2rem);
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
     border-radius: 3rem;
     border: none;
     cursor: pointer;
     background: #FF6A13;
     color: white;
     font-weight: 700;
-    width: auto;
-    min-width: 150px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    min-width: 170px;
+    box-shadow: 0 5px 15px rgba(255, 106, 19, 0.3);
     transition: 0.3s;
-    margin-top: 0.5rem;
   }
 
-  button:active { transform: scale(0.95); }
-  button:disabled { background: #cccccc; cursor: not-allowed; }
-
-  /* 📱 ปรับแต่งพิเศษสำหรับหน้าจอมือถือขนาดเล็ก */
-  @media (max-width: 380px) {
-    .box { padding: 1.5rem; }
-    .image-box { max-width: 240px; }
-    #result { font-size: 1.1rem; min-height: 4rem; }
+  /* Overlay หน้าต่างประวัติ */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none; /* ซ่อนไว้เริ่มต้น */
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    backdrop-filter: blur(5px);
   }
 
-  /* 💻 ปรับแต่งสำหรับ Tablet/Desktop */
-  @media (min-width: 768px) {
-    .box { padding: 3rem; max-width: 600px; }
-    .image-box { max-width: 380px; }
+  .history-modal {
+    background: #f4f4f4;
+    width: 85%;
+    max-width: 400px;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    color: #333;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+
+  .modal-title { font-weight: 700; font-size: 1.2rem; color: #003DA5; }
+  .close-modal { font-size: 1.5rem; cursor: pointer; color: #666; }
+
+  .history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+  }
+
+  .history-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .win-text { color: #003DA5; font-weight: 700; }
+  .clear-history {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #FF6A13;
+    cursor: pointer;
+    text-decoration: underline;
   }
 </style>
 </head>
 <body>
+
+<div class="history-trigger" onclick="toggleHistory(true)">
+  <span style="font-size: 20px;">🕒</span>
+</div>
 
 <div class="box">
   <div class="logo">✨ เซียมซี ttb Spark ✨</div>
@@ -154,7 +217,26 @@
   <button id="drawBtn" onclick="draw()">เขย่าเลย</button>
 </div>
 
+<div id="historyOverlay" class="overlay">
+  <div class="history-modal">
+    <div class="modal-header">
+      <div class="modal-title">📜 ประวัติการสุ่ม</div>
+      <div class="close-modal" onclick="toggleHistory(false)">×</div>
+    </div>
+    <ul id="historyList" class="history-list">
+      <li style="text-align: center; padding: 20px; color: #999;">ยังไม่มีประวัติการสุ่ม</li>
+    </ul>
+    <div class="clear-history" onclick="clearHistory()">ล้างประวัติทั้งหมด</div>
+  </div>
+</div>
+
 <script>
+let historyData = [];
+
+function toggleHistory(show) {
+  document.getElementById("historyOverlay").style.display = show ? "flex" : "none";
+}
+
 function draw() {
   const img = document.getElementById("prizeImg");
   const result = document.getElementById("result");
@@ -169,23 +251,65 @@ function draw() {
   result.classList.remove("winner-active", "lose-active");
   result.innerText = "กำลังเขย่า...";
   result.style.color = "#333";
-  
   btn.disabled = true;
   img.classList.add("shake");
 
   setTimeout(() => {
     img.classList.remove("shake");
+    let textForHistory = "";
+    let isWin = false;
 
     if (Math.random() < 0.4) {
-      result.innerText = "ยินดีด้วย! คุณได้รางวัลจาก ttb Spark 🎉";
+      result.innerHTML = "ยินดีด้วย! <br> คุณได้รางวัลจาก ttb Spark 🎉";
       result.classList.add("winner-active");
+      textForHistory = "ยินดีด้วย! คุณได้รางวัล ttb Spark 🎉";
+      isWin = true;
     } else {
-      result.innerText = consolation[Math.floor(Math.random() * consolation.length)];
+      const loseText = consolation[Math.floor(Math.random() * consolation.length)];
+      result.innerText = loseText;
       result.classList.add("lose-active");
+      textForHistory = loseText;
     }
 
+    saveToHistory(textForHistory, isWin);
     btn.disabled = false;
   }, 2500);
+}
+
+function saveToHistory(text, isWin) {
+  const now = new Date();
+  const time = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+  
+  historyData.unshift({ text, isWin, time });
+  renderHistory();
+}
+
+function renderHistory() {
+  const list = document.getElementById("historyList");
+  if (historyData.length === 0) {
+    list.innerHTML = '<li style="text-align: center; padding: 20px; color: #999;">ยังไม่มีประวัติการสุ่ม</li>';
+    return;
+  }
+
+  list.innerHTML = historyData.map(item => `
+    <li class="history-item">
+      <span class="${item.isWin ? 'win-text' : ''}">${item.text}</span>
+      <span style="font-size: 0.8rem; color: #999; margin-left: 10px;">${item.time}</span>
+    </li>
+  `).join('');
+}
+
+function clearHistory() {
+  if (confirm("ต้องการล้างประวัติใช่หรือไม่?")) {
+    historyData = [];
+    renderHistory();
+  }
+}
+
+// ปิด Modal เมื่อคลิกข้างนอกกรอบขาว
+window.onclick = function(event) {
+  const overlay = document.getElementById("historyOverlay");
+  if (event.target == overlay) toggleHistory(false);
 }
 </script>
 </body>
