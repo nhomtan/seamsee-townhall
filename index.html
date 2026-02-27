@@ -46,29 +46,29 @@
     font-weight: 700;
     min-height: 80px;
     margin: 15px 0;
-    background: white;
+    background-color: white !important;
     border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 15px;
     line-height: 1.3;
-    transition: all 0.4s ease;
-    color: #FF6A13;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #333;
   }
 
-  /* 🏆 รางวัล: ตัวอักษรน้ำเงิน ttb + Glow ส้ม */
-  .winner-style {
+  .winner-active {
     color: #003DA5 !important;
-    background-color: #FFFFFF !important;
-    box-shadow: 0 0 25px rgba(255, 106, 19, 0.8) !important;
-    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 106, 19, 0.9) !important;
+    transform: scale(1.08);
+    border: 3px solid #003DA5;
   }
 
-  .lose-style {
+  .lose-active {
     color: #FF6A13 !important;
-    background-color: #FFFFFF !important;
     box-shadow: none !important;
+    transform: scale(1);
+    border: none;
   }
 
   .image-box {
@@ -94,19 +94,19 @@
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   }
 
-  /* ปรับขนาดปุ่มขึ้นมา 15% จากเดิม */
+  /* ปุ่มลดขนาดลง 10% จากเดิม */
   button {
     font-family: 'IBM Plex Sans Thai', sans-serif;
-    padding: 12px 30px !important; /* เพิ่มพื้นที่กด */
-    font-size: 21px !important;    /* เพิ่มขนาดฟอนต์ */
-    border-radius: 45px;
+    padding: 11px 26px !important; /* ลดลงจาก 12/30 */
+    font-size: 19px !important;    /* ลดลงจาก 21px */
+    border-radius: 40px;
     border: none;
     cursor: pointer;
     background: #FF6A13;
     color: white;
     font-weight: 700;
     width: auto !important;
-    min-width: 170px;
+    min-width: 155px; /* ลดลงตามสัดส่วน */
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     transition: 0.3s;
   }
@@ -138,8 +138,10 @@ function draw() {
     "ฮึบไว้! ครั้งหน้าโดนแน่ ✌️"
   ];
 
+  result.classList.remove("winner-active", "lose-active");
   result.innerText = "กำลังเขย่า...";
-  result.classList.remove("winner-style", "lose-style");
+  result.style.color = "#333";
+  
   btn.disabled = true;
   img.classList.add("shake");
 
@@ -148,10 +150,10 @@ function draw() {
 
     if (Math.random() < 0.4) {
       result.innerText = "ยินดีด้วย! คุณได้รางวัล ttb Spark 🎉";
-      result.classList.add("winner-style");
+      result.classList.add("winner-active");
     } else {
       result.innerText = consolation[Math.floor(Math.random() * consolation.length)];
-      result.classList.add("lose-style");
+      result.classList.add("lose-active");
     }
 
     btn.disabled = false;
