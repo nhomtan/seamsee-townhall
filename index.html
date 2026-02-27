@@ -12,7 +12,7 @@
 <style>
   body {
     margin: 0;
-    font-family: 'IBM Plex Sans Thai', sans-serif; /* เปลี่ยนมาใช้ฟอนต์ที่ดึงได้ชัวร์ */
+    font-family: 'IBM Plex Sans Thai', sans-serif;
     background: linear-gradient(135deg, #003DA5 40%, #FF6A13 100%);
     display: flex;
     justify-content: center;
@@ -90,19 +90,21 @@
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   }
 
+  /* ปรับขนาดปุ่มให้เล็กลงตามคำขอ */
   button {
     font-family: 'IBM Plex Sans Thai', sans-serif;
-    padding: 24px 48px;
-    font-size: 32px;
-    border-radius: 75px;
+    padding: 12px 24px; /* ลด Padding ลง */
+    font-size: 20px;    /* ลดขนาดฟอนต์ลง */
+    border-radius: 40px;
     border: none;
     cursor: pointer;
     background: #FF6A13;
     color: white;
     font-weight: 700;
     transition: 0.3s;
-    box-shadow: 0 6px 20px rgba(255, 106, 19, 0.4);
-    width: 100%;
+    box-shadow: 0 4px 12px rgba(255, 106, 19, 0.4);
+    width: auto;        /* เปลี่ยนจาก 100% เป็น auto เพื่อไม่ให้ปุ่มยาวเต็มกรอบ */
+    min-width: 160px;   /* กำหนดขนาดขั้นต่ำไว้เล็กน้อย */
   }
 
   button:active {
