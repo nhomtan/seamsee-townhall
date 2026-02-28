@@ -271,7 +271,6 @@ function draw() {
 
   result.classList.remove("winner-active", "lose-active");
   result.innerText = "กำลังเขย่าลุ้นโชค...";
-  // ปรับสีเป็นสีดำตามคำขอ
   result.style.color = "#000000"; 
   
   btn.innerText = "กำลังเขย่า...";
@@ -286,7 +285,8 @@ function draw() {
     let historyText = "";
     let isWin = false;
 
-    if (Math.random() < 0.2) {
+    // แก้ไขอัตราการถูกรางวัลกลับเป็น 40% (0.4)
+    if (Math.random() < 0.4) {
       displayHTML = "ยินดีด้วย! <br> คุณได้รางวัล ttb Spark 🎉";
       result.innerHTML = displayHTML;
       result.classList.add("winner-active");
