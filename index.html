@@ -113,7 +113,6 @@
     object-fit: contain;
   }
 
-  /* 🔥 แอนิเมชันเขย่าแบบใหม่ (แรงและชัดเจนขึ้น) */
   .shake {
     animation: shake-hard 0.15s infinite;
     filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
@@ -145,7 +144,7 @@
 
   button:active { transform: scale(0.95); }
   button:disabled { 
-    background: #003DA5; /* เปลี่ยนสีตอนเขย่าให้เด่นขึ้น */
+    background: #003DA5;
     opacity: 0.8;
     cursor: not-allowed;
     transform: translateY(2px);
@@ -272,16 +271,16 @@ function draw() {
 
   result.classList.remove("winner-active", "lose-active");
   result.innerText = "กำลังเขย่าลุ้นโชค...";
-  result.style.color = "#FF6A13";
+  // ปรับสีเป็นสีดำตามคำขอ
+  result.style.color = "#000000"; 
   
-  // เปลี่ยนข้อความปุ่มตอนเขย่า
   btn.innerText = "กำลังเขย่า...";
   btn.disabled = true;
   img.classList.add("shake");
 
   setTimeout(() => {
     img.classList.remove("shake");
-    btn.innerText = "เขย่าเลย"; // คืนค่าปุ่ม
+    btn.innerText = "เขย่าเลย";
     
     let displayHTML = "";
     let historyText = "";
